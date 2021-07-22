@@ -1,0 +1,27 @@
+{
+  "name": "coverage-calculator",
+  "version": "1.0.0",
+  "description": "Calculate test coverage of a workflow",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flow-build/coverage-calculator.git"
+  },
+  "keywords": [
+    "flowBuild",
+    "process",
+    "test"
+  ],
+  "author": "Gustavo Haramura",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/flow-build/coverage-calculator/issues"
+  },
+  "homepage": "https://github.com/flow-build/coverage-calculator#readme",
+  "devDependencies": {
+    "eslint": "^7.31.0"
+  }
+}
