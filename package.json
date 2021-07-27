@@ -4,7 +4,10 @@
   "description": "Calculate test coverage of a workflow",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "migrations": "knex --env ${KNEX_ENV} --knexfile knexfile.js migrate:latest",
+    "seeds": "knex --env ${KNEX_ENV} --knexfile knexfile.js seed:run",
+    "test": "jest --coverage",
+    "tests": "npm -- test -i"
   },
   "repository": {
     "type": "git",
@@ -22,6 +25,9 @@
   },
   "homepage": "https://github.com/flow-build/coverage-calculator#readme",
   "devDependencies": {
-    "eslint": "^7.31.0"
+    "eslint": "^7.31.0",
+    "jest": "^27.0.6",
+    "knex": "^0.95.8",
+    "pg": "^8.6.0"
   }
 }
