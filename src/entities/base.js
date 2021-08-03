@@ -1,10 +1,6 @@
 const { PersistorSingleton } = require("../persist/persist");
 
-class BaseEntity {
-  get id() {
-    return this._id;
-  }
-}
+class BaseEntity {}
 
 class PersistedEntity extends BaseEntity {
   static getEntityClass() {
@@ -23,11 +19,6 @@ class PersistedEntity extends BaseEntity {
 
   getPersist() {
     return this.constructor.getPersist();
-  }
-
-  async get() {
-    let dbData = await this.constructor.getPersist().getAll();
-    return this.deserialized(dbData);
   }
 
   async getById(id) {
