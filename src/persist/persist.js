@@ -28,13 +28,8 @@ class PersistorSingleton {
   getPersistInstance(class_) {
     return this._persists[class_];
   }
-
-  async clear() {
-    const persists = Object.values(this._persists);
-    await persists.forEach(async persist => await persist.deleteAll());
-  }
 }
 
 module.exports = {
-  PersistorSingleton
+  PersistorSingleton,
 };

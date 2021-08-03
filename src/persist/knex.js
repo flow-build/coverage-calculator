@@ -4,25 +4,14 @@ class KnexPersist {
     this._table = table;
   }
 
-  async get(obj_id) {
-    return await this._db(this._table).where("id", obj_id).first();
-  }
-
-  async getAll() {
-    return await this._db(this._table).select();
+  async get(id) {
+    return await this._db(this._table).where("id", id).first();
   }
 }
 
 class WorkflowKnexPersist extends KnexPersist {
   constructor(db) {
     super(db, "workflow");
-  }
-
-  async getCurrentByName(name) {
-    return await this._db(this._table)
-      .first()
-      .where("name", name)
-      .orderBy("version", "desc");
   }
 }
 
@@ -31,10 +20,27 @@ class ProcessKnexPersist extends KnexPersist {
     super(db, "process");
   }
 
-  async getCountByWorkflowId(workflow_id) {
+  async getProcessesByDate(workflowId, amount = 10) {
+    return await this._db(this._table)
+      .select("id")
+      .where("workflow_id", workflowId)
+      .limit(amount)
+      .orderBy("created_at", "desc");
+  }
+
+  async getCountByWorkflowId(workflowId) {
     return await this._db(this._table)
       .count("id")
-      .where("workflow_id", workflow_id);
+      .where("workflow_id", workflowId)
+      .first();
+  }
+
+  async getCountGroupedByStatus(workflowId) {
+    return await this._db(this._table)
+      .select({ status: "current_status" })
+      .count({ processes: "id" })
+      .where("workflow_id", workflowId)
+      .groupBy("current_status");
   }
 }
 
@@ -43,17 +49,10 @@ class ProcessStateKnexPersist extends KnexPersist {
     super(db, "process_state");
   }
 
-  async getCountByWorkflowId(workflow_id) {
-    return await this._db(this._table)
-      .join("process", `${this._table}.process_id`, "process.id")
-      .count("id")
-      .where("process.workflow_id", workflow_id);
-  }
-
-  async getExecution(process_id) {
+  async getExecution(processIds) {
     return await this._db(this._table)
       .distinct("node_id", "next_node_id")
-      .where("process_id", process_id);
+      .whereIn("process_id", processIds);
   }
 }
 
