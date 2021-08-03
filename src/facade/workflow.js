@@ -14,7 +14,11 @@ class Workflow {
     const connections = await listBlueprintConnections(workflow.blueprint);
     const nodes = await workflow.blueprint.nodes.map((node) => node.id);
 
-    return { nodes, connections };
+    return {
+      name: workflow.name,
+      nodes: [...new Set(nodes)],
+      connections: [...new Set(connections)],
+    };
   }
 }
 
