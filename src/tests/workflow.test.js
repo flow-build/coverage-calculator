@@ -14,7 +14,7 @@ describe("Workflow facade tests", () => {
     expect(response.nodes).toBeDefined();
     expect(response.nodes).toHaveLength(3);
     expect(response.connections).toBeDefined();
-    expect(response.connections).toHaveLength(3);
+    expect(response.connections).toHaveLength(2); //the finish node connection should be ignored.
   });
   test("getNodesAndConnections should work using a flow node blueprint", async () => {
     const workflow = new Workflow(db);
@@ -23,6 +23,6 @@ describe("Workflow facade tests", () => {
     expect(response.nodes).toBeDefined();
     expect(response.nodes).toHaveLength(4);
     expect(response.connections).toBeDefined();
-    expect(response.connections).toHaveLength(5);
+    expect(response.connections).toHaveLength(4);
   });
 });
