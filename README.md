@@ -26,10 +26,6 @@ List node ids and connections for the provided workflowId.
 
 Connections are represented as strings, using the pattern '[node_id] -> [next_node_id]'
 
-##### Input
-
-workflowId: string, uuid
-
 ##### Output
 
 ```json
@@ -55,10 +51,6 @@ workflowId: string, uuid
 
 Returns the amount of processes tha provided workflowId has.
 
-##### Input
-
-workflowId: string, uuid
-
 ##### Output
 
 ```json
@@ -71,10 +63,6 @@ workflowId: string, uuid
 
 Returns amount of processes tha provided workflowId has, grouped by its current status.
 
-##### Input
-
-workflowId: string, uuid
-
 ##### Output
 
 ```json
@@ -86,13 +74,9 @@ workflowId: string, uuid
 }
 ```
 
-#### getLatter(workflowId, amount)
+#### getLatter(workflowId, [number])
 
 Returns a list of the latest amount of processes ids from the provided workflowId.
-
-##### Input
-
-workflowId: string, uuid
 
 ##### Output
 
@@ -105,20 +89,10 @@ workflowId: string, uuid
 
 ### ProcessState
 
-#### getExecution(processIds)
+#### getExecution(listOf(processIds))
 
 Returns the execution history from a list of process ids.
-
-##### Input
-
-List of process ids.
-
-```json
-{
-  "type": "array",
-  "items": { "type": "string", "format": "uuid" }
-}
-```
+Assumes that the input is always a list.
 
 ##### Output
 
@@ -139,14 +113,11 @@ List of process ids.
 
 ### Coverage
 
-#### calculateCoverage(workflowId, processCount = 20)
+#### calculateCoverage(workflowId, [number])
 
 Calculate the node coverage and connection coverage for the provided workflow id and the amount of processes desired.
 
-##### Input
-
-workflowId: string, uuid
-processCount: number, default `20`
+Amount (optional): default `20`
 
 ##### Output
 
