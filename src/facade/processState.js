@@ -7,9 +7,9 @@ class ProcessState {
     PersistorProvider.getPersistor(db);
   }
 
-  async getExecution(processId) {
+  async getExecution(processIds) {
     let execution = await new ProcessStateEntity().fetchExecutionByProcessId(
-      processId
+      processIds
     );
 
     const nodes = await execution.map((state) => state.node_id);
