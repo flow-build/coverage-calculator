@@ -14,8 +14,6 @@ const doit = async () => {
   const result = await coverage.calculateCoverage(workflow.id, 50);
 
   console.log(result);
-  console.log("uncovered Nodes: ", result.coverage.nodes.uncovered);
-  console.log("uncovered Connections: ", result.coverage.connections.uncovered);
 
   process.exit(0);
 };
