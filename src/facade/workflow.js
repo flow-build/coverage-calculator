@@ -16,6 +16,7 @@ class Workflow {
 
     return {
       name: workflow.name,
+      id: workflow.workflow_id,
       nodes: [...new Set(nodes)],
       connections: [...new Set(connections)],
     };
