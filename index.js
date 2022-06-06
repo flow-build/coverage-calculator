@@ -2,8 +2,10 @@ require("dotenv").config();
 const Knex = require("knex");
 const knexConfig = require("./knexfile")["development"];
 const { Coverage } = require("./src/facade/coverage");
+const steps = require("./tests/features/support/steps")
+const report = require("./scripts/report")
 const db = Knex(knexConfig);
-const fs = require('fs');
+const fs = require("fs");
 
 if (!fs.existsSync("tests/features/support/coverageReports")) {
   fs.mkdirSync("tests/features/support/coverageReports");
@@ -39,4 +41,8 @@ class BlueprintCoverage {
 
 }
 
-module.exports = { BlueprintCoverage };
+module.exports = { 
+  BlueprintCoverage,
+  steps,
+  report
+};
