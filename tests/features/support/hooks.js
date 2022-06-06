@@ -1,5 +1,5 @@
 const { AfterAll, After } = require("@cucumber/cucumber");
-const { BlueprintCoverage } = require("../../../index");
+const { BlueprintCoverage } = require("../../../src/utils/blueprintCoverage");
 const coverage = new BlueprintCoverage();
 let count = 0;
 let workflowName;
