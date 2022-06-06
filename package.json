@@ -1,13 +1,12 @@
 {
-  "name": "coverage-calculator",
-  "version": "1.2.0",
+  "name": "blueprint-coverage-calculator",
+  "version": "1.2.1",
   "description": "Test workflows and calculate its coverage",
   "main": "index.js",
   "scripts": {
     "migrations": "knex --env ${KNEX_ENV} --knexfile knexfile.js migrate:latest",
     "seeds": "knex --env ${KNEX_ENV} --knexfile knexfile.js seed:run",
     "test": "jest --coverage",
-    "report": "node ./scripts/report.js",
     "tests": "npm -- test -i"
   },
   "repository": {
@@ -16,9 +15,7 @@
   },
   "keywords": [
     "flowBuild",
-    "process",
-    "test",
-    "coverage"
+    "process"
   ],
   "author": "Gustavo Haramura",
   "license": "MIT",
@@ -27,19 +24,19 @@
   },
   "homepage": "https://github.com/flow-build/coverage-calculator#readme",
   "devDependencies": {
+    "axios": "^0.26.1",
+    "console-table-printer": "^2.11.0",
+    "@cucumber/cucumber": "^8.2.2",
     "dotenv": "^10.0.0",
     "eslint": "^7.32.0",
     "jest": "^27.0.6",
     "knex": "^0.95.9",
+    "lodash": "^4.17.21",
     "pg": "^8.7.1",
     "uuid": "^8.3.2",
-    "@cucumber/cucumber": "^7.3.2",
-    "ajv-schema-generator": "^0.0.1",
-    "axios": "^0.26.1",
-    "console-table-printer": "^2.11.0",
-    "jsum": "^2.0.0-alpha.4",
-    "lodash": "^4.17.21",
-    "mustache": "^4.2.0",
     "winston": "^3.6.0"
+  },
+  "bin": {
+    "report": "scripts/report.js"
   }
 }
