@@ -22,9 +22,9 @@ fs.readdir(reportsDir, async (error, files) => {
   }
 
   files.forEach(async (file) => {
-    if (path.extname(`../${reportsDir}/${file}`) === ".json") {
-      const scriptName = path.basename(`../${reportsDir}/${file}`, ".json");
-      const report = require(`../${reportsDir}/${scriptName}`);
+    if (path.extname(`${process.cwd()}/${reportsDir}/${file}`) === ".json") {
+      const scriptName = path.basename(`${process.cwd()}/${reportsDir}/${file}`, ".json");
+      const report = JSON.parse(fs.readFileSync(`${process.cwd()}/${reportsDir}/${scriptName}.json`, "utf8"));
       const passedScenarios = report.processes.testsResult?.filter(test => test === 'PASSED').length;
       const testedScenarios = report.processes.processesEvaluated;
       const nodesCovered = report.coverage.nodes.split(" ")[0];
