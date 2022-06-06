@@ -1,12 +1,13 @@
 {
   "name": "blueprint-coverage-calculator",
-  "version": "1.2.1",
+  "version": "1.2.3",
   "description": "Test workflows and calculate its coverage",
   "main": "index.js",
   "scripts": {
     "migrations": "knex --env ${KNEX_ENV} --knexfile knexfile.js migrate:latest",
     "seeds": "knex --env ${KNEX_ENV} --knexfile knexfile.js seed:run",
     "test": "jest --coverage",
+    "report": "node ./scripts/report.js",
     "tests": "npm -- test -i"
   },
   "repository": {
@@ -37,6 +38,6 @@
     "winston": "^3.6.0"
   },
   "bin": {
-    "report": "scripts/report.js"
+    "report": "node ./scripts/report.js"
   }
 }
