@@ -13,7 +13,8 @@ if (!fs.existsSync("tests/features/support/worldData.json")) {
     if (err) throw err;
   });
 }
-let worldData = require('./worldData.json');
+
+let worldData = JSON.parse(fs.readFileSync("tests/features/support/worldData.json", "utf8"));
 
 function wait(ms = 5000) {
   return new Promise((resolve) => {
