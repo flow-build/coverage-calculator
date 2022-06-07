@@ -1,14 +1,12 @@
-# blueprint-tester-coverage
+# blueprint-coverage-calculator
 
-blueprint-tester-coverage is a plugin to test a workflow and analyse its history of processes. Also this plugin calculate tests node and connection coverage. It uses Cucumber to run automated tests and builtin scripts to calculate tests coverage.
+blueprint-coverage-calculator is a plugin to test a workflow and analyse its history of processes. Also this plugin calculate tests node and connection coverage. It uses Cucumber to run automated tests and builtin scripts to calculate tests coverage.
 
 ## Installation
 
-In order to use this plugin you need to run the following commands:
+In order to use this plugin you need to run the following command to install the required dependencies:
 ```
-npm install blueprint-tester-coverage
-npm install @cucumber/cucumber
-npm install console-table-printer
+npm install --save-dev blueprint-coverage-calculator @cucumber/cucumber console-table-printer
 ```
 
 ## Usage
