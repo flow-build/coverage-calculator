@@ -20,7 +20,7 @@ Add the following folder structure in your repository root:
 |       ├── support
 ```
 
-Finally, inside the folder 'support' create three files 'steps.js', 'world.js' and 'hooks.js' with the following code inside:
+Then, inside the folder 'support' create three files 'steps.js', 'world.js' and 'hooks.js' with the following code inside:
 
 ```js
 // world.js
@@ -34,6 +34,18 @@ module.exports = { steps };
 // hooks.js
 const { hooks } = require("blueprint-coverage-calculator")
 module.exports = { hooks };
+```
+
+Finally you need to add the following variables to your .env file (the values will depend on what environment and database you are using for the tests):
+
+```
+FLOWBUILD_URL=http://localhost:3000
+POSTGRES_HOST=localhost
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+POSTGRES_DATABASE=workflow
+
+// these are just examples of variables values
 ```
 
 ### Running cucumber automated tests
