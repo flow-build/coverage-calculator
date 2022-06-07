@@ -58,6 +58,11 @@ npx cucumber-js tests/features/testBlueprint.feature
 
 After this it will appear in the console the tests results. Besides that a file called 'worldData.json' will be created with the properties you chose to save in it. Also, inside the folder 'support' a new folder called 'coverageReports' will be created with json files. These files have the tests results coverage that you can check whenever you want.
 
+And, if you don't want to publish your tests into cucumber's platform you can simply add a file on your repository root called 'cucumber.js' with the following code in it:
+```js
+module.exports = { default: "--publish-quiet" };
+```
+
 ### Printing a coverage table on console
 
 Having a lot of files in the folder 'coverageReport' make it difficult to read one by one to see the results. To make it easier you can add the following script on your 'package.json' file:
