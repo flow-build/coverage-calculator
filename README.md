@@ -21,7 +21,7 @@ Add the following folder structure in your repository root:
 Then, inside the folder 'support' create a file 'world.js' with the following code inside:
 
 ```js
-// world.js
+// tests/features/support/world.js
 const { world } = require("flowbuild-coverage-calculator");
 
 ```
@@ -54,6 +54,7 @@ After this it will appear in the console the tests results. Besides that a file 
 
 And, if you don't want to publish your tests into cucumber's platform you can simply add a file on your repository root called 'cucumber.js' with the following code in it:
 ```js
+// cucumber.js
 module.exports = { default: "--publish-quiet" };
 ```
 
@@ -61,7 +62,7 @@ module.exports = { default: "--publish-quiet" };
 
 If you need to change or add new methods on CustomWorld you can simply add in your 'world.js' file the following code:
 ```js
-// world.js
+// tests/features/support/world.js
 const { world } = require("flowbuild-coverage-calculator");
 const { setWorldConstructor } = require("@cucumber/cucumber");
 
@@ -79,6 +80,7 @@ Note: if your methods have dependencies like 'logger', 'axios' or env variables,
 
 In case you need to add new steps for your tests you can add a file called 'steps.js' in your 'support' folder and simply put your new steps in it like the example:
 ```js
+// tests/features/support/steps.js
 const { Given } = require("@cucumber/cucumber");
 
 Given("an user with claim {string} is logged in", { timeout: 60 * 1000 }, async function (claim) {
@@ -86,13 +88,15 @@ Given("an user with claim {string} is logged in", { timeout: 60 * 1000 }, async 
   return;
 });
 ```
-Note: this is just and example and if you use a new method, like 'this.getTokenClaim(claim)' you need to add the method inside the file 'world.js'.
+Note: this is just an example and if you use a new method, like 'this.getTokenClaim(claim)' you need to add the method inside the file 'world.js'.
 
 ### Printing a coverage table on console
 
 Having a lot of files in the folder 'coverageReport' make it difficult to read one by one to see the results. To make it easier you can add the following script on your 'package.json' file:
 
 ```json
+// package.json
+...
 "scripts": {
   ...
   "report": "node ./node_modules/flowbuild-coverage-calculator/scripts/report.js",
