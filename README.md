@@ -22,7 +22,7 @@ Then, inside the folder 'support' create a file 'world.js' with the following co
 
 ```js
 // world.js
-const { world } = require("blueprint-coverage-calculator");
+const { world } = require("flowbuild-coverage-calculator");
 
 ```
 
@@ -62,7 +62,7 @@ module.exports = { default: "--publish-quiet" };
 If you need to change or add new methods on CustomWorld you can simply add in your 'world.js' file the following code:
 ```js
 // world.js
-const { world } = require("blueprint-coverage-calculator");
+const { world } = require("flowbuild-coverage-calculator");
 const { setWorldConstructor } = require("@cucumber/cucumber");
 
 class CustomWorld extends world.CustomWorld {
@@ -95,7 +95,7 @@ Having a lot of files in the folder 'coverageReport' make it difficult to read o
 ```json
 "scripts": {
   ...
-  "report": "node ./node_modules/blueprint-coverage-calculator/scripts/report.js",
+  "report": "node ./node_modules/flowbuild-coverage-calculator/scripts/report.js",
   ...
 }
 ```
