@@ -96,7 +96,6 @@ Having a lot of files in the folder 'coverageReport' make it difficult to read o
 
 ```json
 // package.json
-...
 "scripts": {
   ...
   "report": "node ./node_modules/flowbuild-coverage-calculator/scripts/report.js",
