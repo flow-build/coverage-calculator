@@ -1,6 +1,6 @@
 {
   "name": "flowbuild-coverage-calculator",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Test workflows and calculate its coverage",
   "main": "index.js",
   "scripts": {
