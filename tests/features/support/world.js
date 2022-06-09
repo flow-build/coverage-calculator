@@ -220,3 +220,5 @@ class CustomWorld {
 }
 
 setWorldConstructor(CustomWorld);
+
+module.exports = { CustomWorld };
