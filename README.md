@@ -4,9 +4,9 @@ flowbuild-coverage-calculator is a plugin to test a workflow and analyse its his
 
 ## Installation
 
-In order to use this plugin you need to run the following command to install the required dependencies:
+Run the following command in your terminal:
 ```
-npm install --save-dev flowbuild-coverage-calculator @cucumber/cucumber console-table-printer
+npm install --save-dev flowbuild-coverage-calculator
 ```
 
 ## Usage
