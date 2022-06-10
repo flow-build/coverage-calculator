@@ -33,24 +33,24 @@ class Coverage {
     );
 
     const result = {
-      blueprint,
-      history: {
+      blueprint: {
+        name: blueprint.name,
+        id: blueprint.id
+      },
+      processes: {
         processesEvaluated: processCount,
-        connections: [...new Set(execution.connections)],
-        nodes: [...new Set(execution.nodes)],
+        processIds: pids
       },
       coverage: {
-        nodes: {
-          value: 100 * (1 - nodesUncovered.length / blueprint.nodes.length),
-          uncovered: [...new Set(nodesUncovered)],
-        },
-        connections: {
-          value:
-            100 *
-            (1 - connectionsUncovered.length / blueprint.connections.length),
-          uncovered: [...new Set(connectionsUncovered)],
-        },
+        nodes: (100 * (1 - nodesUncovered.length / blueprint.nodes.length)).toPrecision(4) + ' %',
+        connections:
+            (100 *
+            (1 - connectionsUncovered.length / blueprint.connections.length)).toPrecision(4) + ' %',
       },
+      analysis: {
+        uncoveredNodes: [...new Set(nodesUncovered)],
+        uncoveredConnections: [...new Set(connectionsUncovered)]
+      }
     };
 
     return result;

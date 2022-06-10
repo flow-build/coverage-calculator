@@ -1,11 +1,9 @@
-const { Workflow } = require("./src/facade/workflow");
-const { Process } = require("./src/facade/process");
-const { ProcessState } = require("./src/facade/processState");
-const { Coverage } = require("./src/facade/coverage");
+const steps = require("./tests/features/support/steps");
+const world = require("./tests/features/support/world");
+const hooks = require("./tests/features/support/hooks");
 
-module.exports = {
-  Workflow,
-  Process,
-  ProcessState,
-  Coverage,
+module.exports = { 
+  steps,
+  hooks,
+  world
 };

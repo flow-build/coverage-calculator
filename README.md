@@ -1,169 +1,110 @@
-# coverage-calculator
+# flowbuild-coverage-calculator
 
-coverage-calculator is a plugin to analyse the history of processes of a workflow and calculate node and connection coverage.
+flowbuild-coverage-calculator is a plugin to test a workflow and analyse its history of processes. Also this plugin calculate tests node and connection coverage. It uses Cucumber to run automated tests and builtin scripts to calculate tests coverage.
 
 ## Installation
 
+Run the following command in your terminal:
+```
+npm install --save-dev flowbuild-coverage-calculator
+```
+
 ## Usage
 
+Add the following folder structure in your repository root:
+```
+├── tests
+|   ├── features
+|       ├── support
+```
+
+Then, inside the folder 'support' create a file 'world.js' with the following code inside:
+
 ```js
-
-const { Coverage } = require('coverage-calculator')
-
-const workflowId = //any workflowId;
-const coverage = new Coverage(db);
-const result = await coverage.calculateCoverage(workflowId, 50);
+// tests/features/support/world.js
+const { world } = require("flowbuild-coverage-calculator");
 
 ```
 
-## Functions
+Finally you need to add the following variables to your .env file (the values will depend on what environment and database you are using for the tests):
 
-### Worfklow
+```
+FLOWBUILD_URL=http://localhost:3000
+POSTGRES_HOST=localhost
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+POSTGRES_DATABASE=workflow
 
-#### getNodesAndConections(workflowId)
+// these are just examples of variables values
+```
 
-List node ids and connections for the provided workflowId.
+### Running cucumber automated tests
 
-Connections are represented as strings, using the pattern '[node_id] -> [next_node_id]'
+As soon as you have all the dependencies and files as above, you need to create your test file inside the 'features' folder always with the extension '.feature' and using Gherkin sintaxe. Then, run the following command: 
 
-##### Output
+```
+npx cucumber-js tests/features/testBlueprint.feature
+
+// in this case 'testBlueprint.feature' is the test file created and has the same name as the blueprint (testBlueprint.json)
+```
+
+After this it will appear in the console the tests results. Besides that a file called 'worldData.json' will be created with the properties you chose to save in it. Also, inside the folder 'support' a new folder called 'coverageReports' will be created with json files. These files have the tests results coverage that you can check whenever you want.
+
+### Publish cucumber reports quietly
+
+And, if you don't want to publish your tests into cucumber's platform you can simply add a file on your repository root called 'cucumber.js' with the following code in it:
+```js
+// cucumber.js
+module.exports = { default: "--publish-quiet" };
+```
+
+### Extending CustomWorld
+
+If you need to change or add new methods on CustomWorld you can simply add in your 'world.js' file the following code:
+```js
+// tests/features/support/world.js
+const { world } = require("flowbuild-coverage-calculator");
+const { setWorldConstructor } = require("@cucumber/cucumber");
+
+class CustomWorld extends world.CustomWorld {
+  ...
+  // add your new methods here
+  ...
+}
+
+setWorldConstructor(CustomWorld);
+```
+Note: if your methods have dependencies like 'logger', 'axios' or env variables, remember to add them at the top of your file as well.
+
+### Adding new steps
+
+In case you need to add new steps for your tests you can add a file called 'steps.js' in your 'support' folder and simply put your new steps in it like the example:
+```js
+// tests/features/support/steps.js
+const { Given } = require("@cucumber/cucumber");
+
+Given("an user with claim {string} is logged in", { timeout: 60 * 1000 }, async function (claim) {
+  await this.getTokenClaim(claim);
+  return;
+});
+```
+Note: this is just an example and if you use a new method, like 'this.getTokenClaim(claim)' you need to add the method inside the file 'world.js'.
+
+### Printing a coverage table on console
+
+Having a lot of files in the folder 'coverageReport' make it difficult to read one by one to see the results. To make it easier you can add the following script on your 'package.json' file:
 
 ```json
-{
-  "type": "object",
-  "properties": {
-    "name": { "type": "string" },
-    "nodes": {
-      "type": "array",
-      "items": { "type": "string" }
-    },
-    "connections": {
-      "type": "array",
-      "items": { "type": "string" }
-    }
-  }
+// package.json
+"scripts": {
+  ...
+  "report": "node ./node_modules/flowbuild-coverage-calculator/scripts/report.js",
+  ...
 }
 ```
 
-### Process
+And then run the following command to print the coverage table on console:
 
-#### getCount(workflowId)
-
-Returns the amount of processes tha provided workflowId has.
-
-##### Output
-
-```json
-{
-  "type": "number"
-}
 ```
-
-#### getCountByStatus(workflowId)
-
-Returns amount of processes tha provided workflowId has, grouped by its current status.
-
-##### Output
-
-```json
-{
-  "type": "object",
-  "properties": {
-    "[status]": { "type": "number" }
-  }
-}
-```
-
-#### getLatter(workflowId, [number])
-
-Returns a list of the latest amount of processes ids from the provided workflowId.
-
-##### Output
-
-```json
-{
-  "type": "array",
-  "items": { "type": "string", "format": "uuid" }
-}
-```
-
-### ProcessState
-
-#### getExecution(listOf(processIds))
-
-Returns the execution history from a list of process ids.
-Assumes that the input is always a list.
-
-##### Output
-
-```json
-{
-  "type": "object",
-  "properties": {
-    "nodes": {
-      "type": "array",
-      "items": { "type": "string" }
-    },
-    "connections": {
-      "type": "array",
-      "items": { "type": "string" }
-    }
-}
-```
-
-### Coverage
-
-#### calculateCoverage(workflowId, [number])
-
-Calculate the node coverage and connection coverage for the provided workflow id and the amount of processes desired.
-
-Amount (optional): default `20`
-
-##### Output
-
-```json
-{
-  "type": "object",
-  "properties": {
-    "blueprint": { "#ref": "getNodesAndConections" },
-    "history": {
-      "type": "object",
-      "properties": {
-        "processesEvaluated": { "type": "number" },
-        "nodes": {
-          "type": "array",
-          "items": { "type": "string" }
-        },
-        "connections": {
-          "type": "array",
-          "items": { "type": "string" }
-        }
-      }
-    },
-    "coverage": {
-      "type": "object",
-      "properties": {
-        "nodes": {
-          "type": "object",
-          "properties": {
-            "value": { "type": "number", "format": "decimal" },
-            "uncovered": {
-              "type": "array",
-              "items": { "type": "string" }
-            }
-          }
-        },
-        "connections": {
-          "type": "object",
-          "properties": {
-            "value": { "type": "number", "format": "decimal" },
-            "uncovered": {
-              "type": "array",
-              "items": { "type": "string" }
-            }
-          }
-        }
-      }
-    }
-}
+npm run report
 ```

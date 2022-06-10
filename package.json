@@ -1,12 +1,13 @@
 {
-  "name": "coverage-calculator",
-  "version": "1.0.0",
-  "description": "Calculate test coverage of a workflow",
+  "name": "flowbuild-coverage-calculator",
+  "version": "1.4.3",
+  "description": "Test workflows and calculate its coverage",
   "main": "index.js",
   "scripts": {
     "migrations": "knex --env ${KNEX_ENV} --knexfile knexfile.js migrate:latest",
     "seeds": "knex --env ${KNEX_ENV} --knexfile knexfile.js seed:run",
     "test": "jest --coverage",
+    "report": "node ./scripts/report.js",
     "tests": "npm -- test -i"
   },
   "repository": {
@@ -16,7 +17,8 @@
   "keywords": [
     "flowBuild",
     "process",
-    "test"
+    "tests",
+    "coverage"
   ],
   "author": "Gustavo Haramura",
   "license": "MIT",
@@ -24,12 +26,17 @@
     "url": "https://github.com/flow-build/coverage-calculator/issues"
   },
   "homepage": "https://github.com/flow-build/coverage-calculator#readme",
-  "devDependencies": {
+  "dependencies": {
+    "axios": "^0.26.1",
+    "console-table-printer": "^2.11.0",
+    "@cucumber/cucumber": "^8.2.2",
     "dotenv": "^10.0.0",
     "eslint": "^7.32.0",
     "jest": "^27.0.6",
     "knex": "^0.95.9",
+    "lodash": "^4.17.21",
     "pg": "^8.7.1",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "winston": "^3.6.0"
   }
 }
