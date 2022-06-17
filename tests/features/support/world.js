@@ -194,9 +194,11 @@ class CustomWorld {
     if (typeof this.bagValue != 'object') {
       assert.equal(this.bagValue.toString(), this.verifiedValue.toString());
       return true;
-    } else {
+    } else if (typeof this.bagValue == 'object') {
       assert.equal(_.isEqual(_.sortBy(this.bagValue), _.sortBy(this.verifiedValue)), true);
       return true;
+    } else {
+      return false;
     }
   }
 
