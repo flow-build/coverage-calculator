@@ -213,9 +213,11 @@ class CustomWorld {
     if (typeof this.resultValue != 'object') {
       assert.equal(this.resultValue.toString(), this.verifiedValue.toString());
       return true;
-    } else {
+    } else if (typeof this.resultValue == 'object') {
       assert.equal(_.isEqual(_.sortBy(this.resultValue), _.sortBy(this.verifiedValue)), true);
       return true;
+    } else {
+      return false;
     }
   }
 
