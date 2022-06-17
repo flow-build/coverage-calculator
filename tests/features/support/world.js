@@ -79,7 +79,6 @@ class CustomWorld {
     logger.debug("startProcess received");
     this.pid = response.data.process_id;
     logger.info(`PID ${this.pid}`);
-    return;
   }
 
   async submitActivity(payload) {
@@ -118,7 +117,6 @@ class CustomWorld {
       }
       logger.debug(`process status: ${this.currentStatus}`);
     } while (!expectedStatus.includes(this.currentStatus));
-    return;
   }
 
   async getCurrentActivity() {
@@ -132,7 +130,6 @@ class CustomWorld {
     this.activity = response.data;
     this.amid = response.data.id;
     logger.info(`AMID ${this.amid}`);
-    return;
   }
 
   async getCurrentState() {
@@ -147,7 +144,6 @@ class CustomWorld {
     this.currentState = response.data;
     this.currentStatus = response.data.state.status;
     this.nodeId = response.data.state.node_id;
-    return;
   }
 
   async getProcessHistory() {
@@ -160,7 +156,6 @@ class CustomWorld {
     });
     logger.debug(`getProcessHistory response ${response.status}`);
     this.history = response.data;
-    return;
   }
 
   async saveValue(variable, property) {
@@ -180,7 +175,6 @@ class CustomWorld {
       return;
     }
     logger.info(`O processo não possui a propriedade ${property}`);
-    return;
   }
 
   async checkBagValue(node, property, value) {
