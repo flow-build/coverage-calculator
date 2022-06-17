@@ -37,6 +37,6 @@ class BlueprintCoverage {
 
   }
 
-};
+}
 
 module.exports = { BlueprintCoverage };

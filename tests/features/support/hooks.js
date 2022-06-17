@@ -13,5 +13,4 @@ After( function (data) {
 
 AfterAll( async function () {
   await coverage.analyze(workflowName, count, testsResult);
-  return;
 });
