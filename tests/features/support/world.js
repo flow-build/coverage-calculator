@@ -84,7 +84,7 @@ class CustomWorld {
   async submitActivity(payload) {
     logger.info(`submitActivity ${this.amid}`);
     if(payload.includes('{{')) {
-      const middlePayloadArr = payload.match(/\{{(.+?)\}}/g).map(value => value.replaceAll(/[{}]/g, ''));
+      const middlePayloadArr = payload.match(/\{{(.+?)+\}}/g).map(value => value.replaceAll(/[{}]/g, ''));
       const middlePairs = middlePayloadArr.map(value => [value, _.get(worldData, value)]);
       this.resultPayload = Object.fromEntries(middlePairs);
     } else {
